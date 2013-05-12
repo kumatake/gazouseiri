@@ -24,11 +24,21 @@
         Me.FolderBrowserDialog1.Description = "整理元のフォルダを選択してください"
         Me.FolderBrowserDialog2.Description = "整理先のフォルダを選択してください"
 
-        Me.FolderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyPictures
-        Me.FolderBrowserDialog2.RootFolder = Environment.SpecialFolder.MyPictures
+        If My.Settings.firstFlg = True Then
 
-        Me.textMoto.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures)
-        Me.textSaki.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures)
+            My.Settings.smotoPath = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures)
+            My.Settings.ssakiPath = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures)
+
+            My.Settings.firstFlg = False
+            My.Settings.Save()
+
+        End If
+
+        Me.FolderBrowserDialog1.SelectedPath = My.Settings.smotoPath
+        Me.FolderBrowserDialog2.SelectedPath = My.Settings.ssakiPath
+
+        Me.textMoto.Text = Me.FolderBrowserDialog1.SelectedPath
+        Me.textSaki.Text = Me.FolderBrowserDialog2.SelectedPath
 
 
 
@@ -251,4 +261,12 @@
 
     End Function
 
+    Private Sub MainForm_FormClosing(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
+
+        My.Settings.smotoPath = Me.textMoto.Text
+        My.Settings.ssakiPath = Me.textSaki.Text
+
+        My.Settings.Save()
+
+    End Sub
 End Class
