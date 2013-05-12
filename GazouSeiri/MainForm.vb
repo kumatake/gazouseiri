@@ -39,7 +39,7 @@
 
         If Me.FolderBrowserDialog2.ShowDialog = Windows.Forms.DialogResult.OK Then
 
-            Me.textMoto.Text = Me.FolderBrowserDialog2.SelectedPath
+            Me.textSaki.Text = Me.FolderBrowserDialog2.SelectedPath
 
         End If
 
@@ -58,6 +58,8 @@
         Dim day As String
         Dim sakiPath As String
         Dim sakiFilePath As String
+        Dim tougouPath As String
+        Dim tougouFilePath As String
 
         Dim suc As Integer = 0
         Dim fai As Integer = 0
@@ -66,7 +68,28 @@
         'パスをチェックしてエラーだったら終了
         If Me.pathCheck = False Then
 
-            Return
+            Exit Sub
+
+        End If
+
+        '統合済みフォルダパスの作成
+        tougouPath = Me.textMoto.Text & "\統合済み"
+
+        '統合済みフォルダを確認しなければ作成
+        If System.IO.Directory.Exists(tougouPath) = False Then
+
+            Try
+
+                System.IO.Directory.CreateDirectory(tougouPath)
+
+            Catch ex As Exception
+
+                MessageBox.Show("フォルダ作成でエラーが発生しました。" & vbCrLf & "処理を終了します。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+                Exit Sub
+
+            End Try
+
 
         End If
 
@@ -106,6 +129,8 @@
 
                 Next
 
+                image.Dispose()
+
                 If val.Length = 0 Then
 
                     fai += 1
@@ -121,7 +146,7 @@
                 sakiPath = textSaki.Text & "\" & year & "_" & month & "_" & day
 
                 'sakiPathのフォルダが有るか確認し、ないなら作成
-                If System.IO.Directory.Exists(sakiPath) Then
+                If System.IO.Directory.Exists(sakiPath) = False Then
 
                     Try
 
@@ -138,7 +163,7 @@
 
                 End If
 
-                '移動先のファイルのパスを作成
+                'コピー先のファイルのパスを作成
                 sakiFilePath = sakiPath & "\" & fileName
 
                 '画像ファイルをコピーする
@@ -148,14 +173,41 @@
 
                 Catch ex As IO.IOException
 
-                    fai += 0
+                    fai += 1
 
                     Continue For
 
                 End Try
 
+                '統合済みフォルダでのファイルのパスを作成
+                tougouFilePath = tougouPath & "\" & fileName
+
+                '統合済みフォルダに移動
+                Try
+
+                    System.IO.File.Move(filePath, tougouFilePath)
+
+                Catch ex As IO.IOException
+
+                    fai += 1
+
+                    Continue For
+
+                End Try
+
+                suc += 1
 
             Next
+
+            MessageBox.Show("終了しました。" & vbCrLf _
+                            & "成功：" & suc & vbCrLf _
+                            & "失敗・スキップ：" & fai & vbCrLf _
+                            & "エラー：" & err & vbCrLf _
+                            , "結果", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+        Else
+
+            MessageBox.Show("画像ファイルが見つかりませんでした。終了します。", "結果", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
         End If
 
