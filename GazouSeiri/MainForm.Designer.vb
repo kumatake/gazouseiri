@@ -99,7 +99,7 @@ Partial Class MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(624, 441)
+        Me.ClientSize = New System.Drawing.Size(624, 150)
         Me.Controls.Add(Me.buttonStart)
         Me.Controls.Add(Me.buttonSaki)
         Me.Controls.Add(Me.Label2)
@@ -107,6 +107,7 @@ Partial Class MainForm
         Me.Controls.Add(Me.buttonMoto)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.textMoto)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.MaximizeBox = False
         Me.Name = "MainForm"
         Me.Text = "画像整理くん"
