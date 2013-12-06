@@ -153,7 +153,18 @@
                 month = val.Substring(5, 2)
                 day = val.Substring(8, 2)
 
-                sakiPath = textSaki.Text & "\" & year & "_" & month & "_" & day
+                '追加文字が入力されているのであれば文字を追加する
+                If Textadd.TextLength = 0 Then
+
+                    sakiPath = textSaki.Text & "\" & year & "_" & month & "_" & day
+
+                Else
+
+                    sakiPath = textSaki.Text & "\" & year & "_" & month & "_" & day & "_" & Textadd.Text
+
+                End If
+
+
 
                 'sakiPathのフォルダが有るか確認し、ないなら作成
                 If System.IO.Directory.Exists(sakiPath) = False Then

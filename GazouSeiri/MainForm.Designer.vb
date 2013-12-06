@@ -31,6 +31,8 @@ Partial Class MainForm
         Me.textSaki = New System.Windows.Forms.TextBox()
         Me.FolderBrowserDialog2 = New System.Windows.Forms.FolderBrowserDialog()
         Me.buttonStart = New System.Windows.Forms.Button()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Textadd = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'FolderBrowserDialog1
@@ -88,18 +90,36 @@ Partial Class MainForm
         '
         'buttonStart
         '
-        Me.buttonStart.Location = New System.Drawing.Point(12, 82)
+        Me.buttonStart.Location = New System.Drawing.Point(290, 82)
         Me.buttonStart.Name = "buttonStart"
-        Me.buttonStart.Size = New System.Drawing.Size(600, 49)
+        Me.buttonStart.Size = New System.Drawing.Size(322, 49)
         Me.buttonStart.TabIndex = 6
         Me.buttonStart.Text = "整理開始"
         Me.buttonStart.UseVisualStyleBackColor = True
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(12, 100)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(89, 12)
+        Me.Label3.TabIndex = 7
+        Me.Label3.Text = "追加文字（任意）"
+        '
+        'Textadd
+        '
+        Me.Textadd.Location = New System.Drawing.Point(107, 97)
+        Me.Textadd.Name = "Textadd"
+        Me.Textadd.Size = New System.Drawing.Size(167, 19)
+        Me.Textadd.TabIndex = 8
         '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(624, 150)
+        Me.Controls.Add(Me.Textadd)
+        Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.buttonStart)
         Me.Controls.Add(Me.buttonSaki)
         Me.Controls.Add(Me.Label2)
@@ -124,5 +144,7 @@ Partial Class MainForm
     Friend WithEvents textSaki As System.Windows.Forms.TextBox
     Friend WithEvents FolderBrowserDialog2 As System.Windows.Forms.FolderBrowserDialog
     Friend WithEvents buttonStart As System.Windows.Forms.Button
+    Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents Textadd As System.Windows.Forms.TextBox
 
 End Class
